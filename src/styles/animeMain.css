@@ -17,7 +17,7 @@
 
 .animeView {
     /*display: inline-block;*/
-    margin: 5px;
+    margin: 1%;
     word-wrap: break-word;
     text-align: left;
     width: 19%;
@@ -32,12 +32,41 @@
     border-radius: 20px;
 }
 
+.animeView img:hover {
+    animation: imgAnim 2s linear;
+    animation-fill-mode: forwards;
+}
+
 .animeView h2,h3,p {
     /*word-break: break-all;*/
     /*overflow: hidden;*/
-    text-overflow: ellipsis;
     color: #CEBCDD;
-    font-size: 15px;
+    font-size: 1em;
     margin-top: 10px;
     margin-bottom: 0px;
+}
+
+@keyframes imgAnim {
+    /*from {*/
+    /*    filter: brightness(80%);*/
+    /*    transform: scale(1);*/
+    /*    transform: rotate(0deg);*/
+    /*    !*border-radius: 20px;*!*/
+    /*}*/
+    /*to {*/
+    /*    filter: brightness(100%);*/
+    /*    transform: scale(1.03);*/
+    /*    transform: rotate(-360deg);*/
+    /*    !*border-radius: 200px;*!*/
+    /*}*/
+
+    0% {
+        transform: rotate3d(0, 0, 0, 0deg) scale(1);
+    }
+    50% {
+        transform: rotate3d(0, 60, 30, 120deg) scale(0.9);
+    }
+    100% {
+        transform: rotate3d(0, -0, -0, 360deg) scale(1.03);
+    }
 }
