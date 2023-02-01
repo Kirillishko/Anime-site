@@ -11,15 +11,16 @@
 }
 
 .animeCompilation {
-    /*flex-wrap: wrap;*/
+    display: flex;
+    justify-content: center;
 }
 
 .animeView {
-    display: inline-block;
-    padding: 5px;
+    /*display: inline-block;*/
+    margin: 5px;
     word-wrap: break-word;
     text-align: left;
-    width: 270px;
+    width: 19%;
 }
 
 /*.animeViewText {*/
@@ -27,7 +28,7 @@
 /*}*/
 
 .animeView img {
-    width: inherit;
+    width: 100%;
     border-radius: 20px;
 }
 
@@ -37,4 +38,6 @@
     text-overflow: ellipsis;
     color: #CEBCDD;
     font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
