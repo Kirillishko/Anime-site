@@ -12,7 +12,7 @@ const AnimeCompilation: FC<AnimeCompilationProps> = ({animeCompilation}) => {
     return (
         <div className="animeCompilation">
             {animeCompilation.map(anime =>
-                <AnimeView anime={anime}/>
+                <AnimeView key={anime.id} anime={anime}/>
             )}
         </div>
     );

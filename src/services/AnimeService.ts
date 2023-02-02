@@ -21,6 +21,12 @@ export const animeApi = createApi({
                     limit: limit,
                 }
             })
+        }), //https://kitsu.io/api/edge/anime?filter%5Bstatus%5D=current&page%5Blimit%5D=5&sort=-user_count
+        fetchAnimePopularOngoing: build.query<IAnimeData, number>({
+            query: (limit: number) => ({
+                url: `/anime?filter%5Bstatus%5D=current&page%5Blimit%${limit}D=5&sort=-user_count`,
+                ///anime?filter[status]=current&page[limit]=${limit}&sort=-user_count
+            })
         }),
     })
 })

@@ -8,11 +8,14 @@ interface AnimeViewProps {
 
 const AnimeView: FC<AnimeViewProps> = ({anime}) => {
 
-    const posterImage = anime.attributes.posterImage?.large;
+    const posterImage = anime.attributes.posterImage.small;
+    console.log(posterImage);
 
     return (
         <div className="animeView">
-            {posterImage && <img src={posterImage}/>}
+            <div className={"animeViewImage"}>
+                {posterImage && <img src={posterImage}/>}
+            </div>
             <h3>{anime.attributes.titles.ja_jp}</h3>
             {/*<h2>{anime.attributes.canonicalTitle}</h2>*/}
             <p>{anime.attributes.canonicalTitle}</p>

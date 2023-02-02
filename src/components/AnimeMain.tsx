@@ -4,8 +4,8 @@ import "../styles/animeMain.css"
 import AnimeCompilation from "./AnimeCompilation";
 
 const AnimeMain = () => {
-    const {data: popularOnWeekAnime, error, isLoading } = animeApi.useFetchAnimePopularOnWeekQuery(5);
-    console.log(popularOnWeekAnime);
+    const {data: popularOnWeekAnime, error: errorOnWeek, isLoading: isLoadingOnWeek } = animeApi.useFetchAnimePopularOnWeekQuery(5);
+    const {data: popularOngoingAnime, error: errorOngoing, isLoading: isLoadingOngoing} = animeApi.useFetchAnimePopularOngoingQuery(15);
 
 
     return (
@@ -15,6 +15,11 @@ const AnimeMain = () => {
             {popularOnWeekAnime &&
                     <AnimeCompilation key={0}
                                       animeCompilation={popularOnWeekAnime.data}/>
+
+            }
+            {popularOngoingAnime &&
+                <AnimeCompilation key={1}
+                                  animeCompilation={popularOngoingAnime.data}/>
 
             }
         </div>
