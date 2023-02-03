@@ -5,12 +5,16 @@ import AnimeView from "./AnimeView";
 
 interface AnimeCompilationProps {
     animeCompilation: IAnime[],
+    title: string,
 }
 
-const AnimeCompilation: FC<AnimeCompilationProps> = ({animeCompilation}) => {
+const AnimeCompilation: FC<AnimeCompilationProps> = ({animeCompilation, title}) => {
 
     return (
         <div className="animeCompilation">
+            <div className="animeCompilationTitle">
+                <h1>{title}</h1>
+            </div>
             {animeCompilation.map(anime =>
                 <AnimeView key={anime.id} anime={anime}/>
             )}

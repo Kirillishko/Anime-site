@@ -14,11 +14,11 @@ const AnimeMain = () => {
             {/*{error && <h1>Ошибка при загрузке</h1>}*/}
             {popularOnWeekAnime &&
                     <AnimeCompilation key={0}
-                                      animeCompilation={popularOnWeekAnime.data}/>
+                                      animeCompilation={popularOnWeekAnime.data} title={"Популярное на этой неделе"}/>
             }
             {popularOngoingAnime &&
                 <AnimeCompilation key={1}
-                                  animeCompilation={popularOngoingAnime.data}/>
+                                  animeCompilation={popularOngoingAnime.data} title={"Популярное аниме в онгоинге"}/>
 
             }
         </div>
