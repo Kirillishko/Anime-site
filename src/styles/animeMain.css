@@ -1,21 +1,23 @@
 .animeMain {
-    background-color: #525252;
-    max-width: 80%;
-    margin: 0% 10% 0% 10%;
+    background-color: #4d4d4d;
 }
 
 .animeContainer {
     background-color: #910f0f;
+    max-width: 80%;
+    margin: 0% 10% 0% 10%;
     border: 1rem solid #61dafb;
     border-radius: 1rem;
 }
 
 .animeCompilation {
     background-color: #910f0f;
+    max-width: 80%;
+    margin: 0% 10% 0% 10%;
     border: 1rem solid #61dafb;
     border-radius: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -31,27 +33,13 @@
 /*    word-wrap: break-word;*/
 /*}*/
 
-.animeViewImage {
-
-}
-
-.animeViewImage img {
-    width: 300px;
+.animeView img {
+    width: 100%;
     border-radius: 20px;
-    mask-image: linear-gradient(to left, #11de93, #0e7ad6);
 }
-
-/*.animeViewImage img:after {*/
-/*    content: "";*/
-/*    position: center;*/
-/*    width: 100px;*/
-/*    height: 100px;*/
-/*    mask-image: linear-gradient(to left, #11de93, #0e7ad6);*/
-/*    !*background-image: linear-gradient(to left, #11de93, #0e7ad6);*!*/
-/*}*/
 
 .animeView img:hover {
-    animation: imgAnim .1s ease;
+    animation: imgAnim 2s linear;
     animation-fill-mode: forwards;
 }
 
@@ -60,8 +48,7 @@
     /*overflow: hidden;*/
     color: #CEBCDD;
     font-size: 1em;
-    margin-top: 10px;
-    margin-bottom: 0px;
+    border: solid #61dafb;
 }
 
 @keyframes imgAnim {
@@ -79,9 +66,12 @@
     /*}*/
 
     0% {
-        transform: rotate(0deg) scale(1);
+        transform: rotate3d(0, 0, 0, 0deg) scale(1);
+    }
+    50% {
+        transform: rotate3d(0, 60, 30, 120deg) scale(0.9);
     }
     100% {
-        transform: rotate(0deg) scale(1);
+        transform: rotate3d(0, -0, -0, 360deg) scale(1.03);
     }
 }
