@@ -17,7 +17,7 @@
     border: 1rem solid #61dafb;
     border-radius: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 

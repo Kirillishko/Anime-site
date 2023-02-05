@@ -4,7 +4,7 @@ import AnimeView from "./AnimeView";
 import AnimeCompilation from "./AnimeCompilation";
 
 const AnimeContainer = () => {
-    const {data: animeList, error, isLoading } = animeApi.useFetchAnimeListQuery(5);
+    const {data: animeList, error, isLoading } = animeApi.useFetchAnimeListQuery({limit: 5, offset: 5});
 
     console.log(animeList);
 
