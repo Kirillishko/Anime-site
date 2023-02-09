@@ -8,14 +8,10 @@ import {QueryDefinition} from "@reduxjs/toolkit/query";
 import {IAnimeData} from "../models/Anime/IAnimeData";
 
 interface AnimeCompilationProps {
-    fetchAnime: UseQuery<QueryDefinition<IPagination | number, any, any, IAnimeData>>,
-    params : IPagination | number,
+    animeData: IAnimeData,
 }
 
-const AnimeCompilation: FC<AnimeCompilationProps> = ({fetchAnime, params}) => {
-
-    const {data: animeData, error: error, isLoading: isLoading} = fetchAnime(params)
-
+const AnimeCompilation: FC<AnimeCompilationProps> = ({animeData}) => {
     return (
         <div className="animeCompilation">
             {animeData && animeData.data.map(anime =>
