@@ -46,5 +46,16 @@ export const animeApi = createApi({
                 }
             })
         }),
+        fetchAnimeByName: build.query<IAnimeData, IPagination>({
+            query: ({limit, offset}) => ({
+                url: '/anime',
+                params: {
+                    'filter[status]': 'upcoming',
+                    'page[limit]': limit,
+                    'page[offset]': offset,
+                    'sort': '-user_count',
+                }
+            })
+        }),
     })
 })
