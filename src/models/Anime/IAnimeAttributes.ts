@@ -6,6 +6,7 @@ export interface IAnimeAttributes {
     updatedAt: string,
     slug: string,
     description: string,
+    synopsis : string,
     coverImageTopOffset: number,
     titles: IAnimeTitles,
     canonicalTitle: string,

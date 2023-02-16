@@ -6,6 +6,10 @@ interface AnimeViewProps {
     anime: IAnime
 }
 
+const getAnime = () => {
+
+}
+
 const AnimeView: FC<AnimeViewProps> = ({anime}) => {
 
     const posterImage = anime.attributes.posterImage.small;
@@ -16,9 +20,9 @@ const AnimeView: FC<AnimeViewProps> = ({anime}) => {
             <div className={"animeViewImage"}>
                 {posterImage && <img src={posterImage}/>}
             </div>
-            <h3>{anime.attributes.titles.ja_jp}</h3>
-            {/*<h2>{anime.attributes.canonicalTitle}</h2>*/}
-            <p>{anime.attributes.canonicalTitle}</p>
+            <h3>{anime.attributes.titles.en}</h3>
+            <h3>{anime.attributes.canonicalTitle}</h3>
+            <p>{anime.attributes.description}</p>
         </div>
     );
 };

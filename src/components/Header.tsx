@@ -6,7 +6,7 @@ const Header = () => {
             <div className={"subHeader"}>
                 <div className={"leftSubHeader"}>
                     {/*<img src={"https://pixelbox.ru/wp-content/uploads/2020/12/ava-vk-cats-98.jpg"}/>*/}
-                    <h1>Gonime</h1>
+                    <h1>NiBeNiMe</h1>
                     <p>Главная</p>
                     <p>Поиск</p>
                 </div>
