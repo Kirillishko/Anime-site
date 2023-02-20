@@ -1,0 +1,55 @@
+.header {
+    top: 0;
+    height: 5%;
+    width: 100%;
+    background-color: #343a40;
+    border-bottom: solid #ff5c57;
+    display: inline-flex;
+    position: fixed;
+    z-index: 1;
+}
+
+.header h1, .header p {
+    color: #fff;
+    margin: auto 7% auto 7%;
+}
+
+.subHeader {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: inherit;
+}
+
+.subHeader img {
+    height: -webkit-fill-available;
+}
+
+.leftSubHeader {
+    display: inline-flex;
+    width: 20%;
+    float: left;
+    margin-right: auto;
+}
+
+.leftSubHeader a {
+    margin-right: 15%;
+}
+
+.rightSubHeader {
+    margin-left: auto;
+    width: 20%;
+    float: right;
+}
+
+.rightSubHeader img {
+    float: right;
+    margin: 1%;
+}
+
+.outlet {
+    margin-top: 5%;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}

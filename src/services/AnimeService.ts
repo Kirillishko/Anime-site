@@ -1,13 +1,15 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
-import {IAnimeData} from "../models/Anime/IAnimeData";
+import {IAnimeDatas} from "../models/Anime/IAnimeDatas";
 import {IPagination} from "../models/IPagination";
+import {IAnime} from "../models/Anime/IAnime";
+import {IAnimeData} from "../models/Anime/IAnimeData";
 
 
 export const animeApi = createApi({
     reducerPath: 'animeApi',
     baseQuery: fetchBaseQuery({baseUrl: 'https://kitsu.io/api/edge'}),
     endpoints: (build) => ({
-        fetchAnimeList: build.query<IAnimeData, IPagination>({
+        fetchAnimeList: build.query<IAnimeDatas, IPagination>({
             query: ({limit, offset}) => ({
                 url: '/anime',
                 params: {
@@ -16,7 +18,7 @@ export const animeApi = createApi({
                 }
             })
         }),
-        fetchAnimePopularOnWeek: build.query<IAnimeData, number>({
+        fetchAnimePopularOnWeek: build.query<IAnimeDatas, number>({
             query: (limit: number) => ({
                 url: '/trending/anime',
                 params: {
@@ -24,7 +26,7 @@ export const animeApi = createApi({
                 }
             })
         }),
-        fetchAnimePopularOngoing: build.query<IAnimeData, IPagination>({
+        fetchAnimePopularOngoing: build.query<IAnimeDatas, IPagination>({
             query: ({limit, offset}) => ({
                 url: '/anime',
                 params: {
@@ -35,7 +37,7 @@ export const animeApi = createApi({
                 }
             })
         }), //https://kitsu.io/api/edge/anime?filter%5Bstatus%5D=upcoming&page%5Blimit%5D=5&sort=-user_count
-        fetchAnimePopularUpcoming: build.query<IAnimeData, IPagination>({
+        fetchAnimePopularUpcoming: build.query<IAnimeDatas, IPagination>({
             query: ({limit, offset}) => ({
                 url: '/anime',
                 params: {
@@ -46,15 +48,20 @@ export const animeApi = createApi({
                 }
             })
         }),
-        fetchAnimeByName: build.query<IAnimeData, IPagination>({
-            query: ({limit, offset}) => ({
+        //http://localhost:3000/Chainsaw%20Man
+        //https://kitsu.io/api/edge/anime?filter[text]=Cowboy%20Bebop
+        fetchAnimeByName: build.query<IAnimeDatas, string>({
+            query: (name) => ({
                 url: '/anime',
                 params: {
-                    'filter[status]': 'upcoming',
-                    'page[limit]': limit,
-                    'page[offset]': offset,
-                    'sort': '-user_count',
+                    'filter[text]': name,
+                    'page[limit]': 1,
                 }
+            })
+        }),
+        fetchAnimeById: build.query<IAnimeData, string>({
+            query: (id) => ({
+                url: `/anime/${id}`
             })
         }),
     })

@@ -2,19 +2,20 @@ import React from 'react';
 import {animeApi} from "../services/AnimeService";
 import "../styles/animeMain.css"
 import AnimeCompilation from "./AnimeCompilation";
-import {IAnimeData} from "../models/Anime/IAnimeData";
+import {IAnimeDatas} from "../models/Anime/IAnimeDatas";
 import {FetchBaseQueryError} from "@reduxjs/toolkit/query";
 import {SerializedError} from "@reduxjs/toolkit";
 
 interface IPlaceAnimeCompilationProps {
-    data?: IAnimeData,
+    data?: IAnimeDatas,
     error?:  FetchBaseQueryError | SerializedError,
     isLoading: boolean,
+    title: string,
     index: number,
 }
 
 const PlaceAnimeCompilation = (props: IPlaceAnimeCompilationProps) => {
-    const {data, error, isLoading, index} = props
+    const {data, error, isLoading, title, index} = props
 
     if (isLoading)
         return <h1>Идёт загрузка...</h1>
@@ -23,7 +24,8 @@ const PlaceAnimeCompilation = (props: IPlaceAnimeCompilationProps) => {
 
      return data &&
          <AnimeCompilation key={index}
-                           animeData={data}/>
+                           animeData={data}
+                           title={title}/>
 }
 
 const AnimeMain = () => {
@@ -33,9 +35,9 @@ const AnimeMain = () => {
 
     return (
         <div className="animeMain">
-            {PlaceAnimeCompilation({data: popularOnWeekAnime, error: errorOnWeek, isLoading: isLoadingOnWeek, index: 1})}
-            {PlaceAnimeCompilation({data: popularOngoingAnime, error: errorOngoing, isLoading: isLoadingOngoing, index: 2})}
-            {PlaceAnimeCompilation({data: popularUpcomingAnime, error: errorUpcoming, isLoading: isLoadingUpcoming, index: 3})}
+            {PlaceAnimeCompilation({data: popularOnWeekAnime, error: errorOnWeek, isLoading: isLoadingOnWeek, title: "Популярное на этой неделе", index: 1})}
+            {PlaceAnimeCompilation({data: popularOngoingAnime, error: errorOngoing, isLoading: isLoadingOngoing, title: "Популярное аниме в онгоинге", index: 2})}
+            {PlaceAnimeCompilation({data: popularUpcomingAnime, error: errorUpcoming, isLoading: isLoadingUpcoming, title: "Топ предстоящих аниме", index: 3})}
             {/*}*/}
         </div>
     );

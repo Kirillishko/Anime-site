@@ -25,7 +25,7 @@ export interface IAnimeAttributes {
     tba: null,
     posterImage: IAnimeImages,
     coverImage: IAnimeImages | null,
-    episodeCount: number,
+    episodeCount: number | null,
     episodeLength: number,
     totalLength: number,
     youtubeVideoId: string,

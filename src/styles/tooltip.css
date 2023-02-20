@@ -1,0 +1,11 @@
+.tooltipText {
+    visibility: hidden;
+}
+
+.tooltip:hover .tooltipText {
+    visibility: visible;
+}
+
+.tooltipText::after {
+    content: "";
+}

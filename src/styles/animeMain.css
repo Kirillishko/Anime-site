@@ -1,133 +1,94 @@
-.animeMain {
-    margin-top: 5%;
-}
-
 .animeCompilation {
-    background-color: #ffc0cb; /*910f0f */
-    max-width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1rem solid #e0000f; /*61dafb*/
-    border-radius: 1rem;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     flex-wrap: wrap;
+    margin-bottom: 2%;
 }
 
 .animeCompilationTitle {
     width: 100%;
-    margin: 1% 1%;
+    margin: 2% 1% 0% 1.7%;
     display: inline-flex;
     justify-content: flex-start;
 }
 
+.animeCompilationTitle h3 {
+    margin: 0% 0%;
+}
+
 .animeView {
-    /*display: inline-block;*/
-    margin: 1%;
+    /*margin: 0% 1% 0% 0%;*/
+    /*margin: 1%;*/
+    margin-top: ;
     word-wrap: break-word;
     text-align: left;
     width: 18%;
 }
 
-/*.animeViewText {*/
-/*    word-wrap: break-word;*/
-/*}*/
+.animeView:first-child {
+    /*margin-left: 1%;*/
+}
+
+.animeView hr {
+    border-color: #57545496;
+    width: 80%;
+}
 
 .animeView img {
+    margin-top: 10%;
     width: 100%;
     border-radius: 20px;
 }
 
 .animeView img:hover {
-    animation: imgAnim 2s linear;
+    animation: imgAnim 0.05s linear;
     animation-fill-mode: forwards;
 }
 
-.animeView h2, .animeView h3 {
-    word-break: break-all;
+.animeView h2, .animeView h3, .animeView p {
     overflow: hidden;
-    color: #4d0000; /*CEBCDD*/
-    font-size: 1em;
-    border: solid #b74f66;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.animeView h2, .animeView h3 {
+    display: grid;
+    align-content: center;
+    text-align: center;
+    height: 8%;
+    -webkit-line-clamp: 2;
+    color: #212529;
+    margin: 5% 0%;
+}
+
+.animeView h2 {
+    /*font-size: 1rem;*/
+}
+
+.animeView h3 {
+    /*font-size: 1rem;*/
 }
 
 .animeView p {
-    /*word-break: initial;*/
-    text-overflow: ellipsis;
-    height: 40px;
-}
-
-.header {
-    top: 0;
-    height: 5%;
-    width: 100%;
-    background-color: #343a40;
-    border-bottom: solid #ff5c57;
-    display: inline-flex;
-    position: fixed;
-    z-index: 1;
-}
-
-.plug {
-    /*margin-top: 5%;*/
-    width: 100%;
-}
-
-.header h1, .header p {
-    margin: auto 1% auto 1%;
-}
-
-.subHeader {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    display: inherit;
-}
-
-.subHeader img {
-    height: -webkit-fill-available;
-}
-
-.leftSubHeader {
-    display: inline-flex;
-    width: 20%;
-    float: left;
-    margin-right: auto;
-}
-
-.rightSubHeader {
-    margin-left: auto;
-    width: 20%;
-    float: right;
-}
-
-.rightSubHeader img {
-    float: right;
-    margin: 1%;
+    font-size: 90%;
+    text-align: left;
+    -webkit-line-clamp: 6;
+    margin-bottom: 15%;
 }
 
 @keyframes imgAnim {
-    /*from {*/
-    /*    filter: brightness(80%);*/
-    /*    transform: scale(1);*/
-    /*    transform: rotate(0deg);*/
-    /*    !*border-radius: 20px;*!*/
-    /*}*/
-    /*to {*/
-    /*    filter: brightness(100%);*/
-    /*    transform: scale(1.03);*/
-    /*    transform: rotate(-360deg);*/
-    /*    !*border-radius: 200px;*!*/
-    /*}*/
-
-    0% {
-        transform: rotate3d(0, 0, 0, 0deg) scale(1);
+    from {
+        filter: brightness(100%);
+        transform: scale(1);
+        /*border-radius: 20px;*/
     }
-    50% {
-        transform: rotate3d(0, 60, 30, 120deg) scale(0.9);
-    }
-    100% {
-        transform: rotate3d(0, -0, -0, 360deg) scale(1.03);
+    to {
+        filter: brightness(80%);
+        transform: scale(1.03);
+        /*border-radius: 200px;*/
     }
 }
 
