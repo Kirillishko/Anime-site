@@ -3,6 +3,7 @@ import {IAnimeDatas} from "../models/Anime/IAnimeDatas";
 import {IPagination} from "../models/IPagination";
 import {IAnime} from "../models/Anime/IAnime";
 import {IAnimeData} from "../models/Anime/IAnimeData";
+import {ICategories} from "../models/Anime/Category/ICategories";
 
 
 export const animeApi = createApi({
@@ -47,6 +48,26 @@ export const animeApi = createApi({
                     'sort': '-user_count',
                 }
             })
+        }), // https://kitsu.io/api/edge/anime?page%5Blimit%5D=5&sort=-average_rating
+        fetchAnimeByAverageRating: build.query<IAnimeDatas, IPagination>({
+            query: ({limit, offset}) => ({
+                url: '/anime',
+                params: {
+                    'page[limit]': limit,
+                    'page[offset]': offset,
+                    'sort': '-average_rating',
+                }
+            })
+        }), //https://kitsu.io/api/edge/anime?page%5Blimit%5D=5&sort=-user_count
+        fetchAnimeMostPopular: build.query<IAnimeDatas, IPagination>({
+            query: ({limit, offset}) => ({
+                url: '/anime',
+                params: {
+                    'page[limit]': limit,
+                    'page[offset]': offset,
+                    'sort': '-user_count',
+                }
+            })
         }),
         //http://localhost:3000/Chainsaw%20Man
         //https://kitsu.io/api/edge/anime?filter[text]=Cowboy%20Bebop
@@ -64,5 +85,10 @@ export const animeApi = createApi({
                 url: `/anime/${id}`
             })
         }),
+        fetchAnimeCategoriesById: build.query<ICategories, string>({
+            query: (id) => ({
+                url: `/anime/${id}/categories`
+            })
+        }), // https://kitsu.io/api/edge/anime/43845/categories
     })
 })

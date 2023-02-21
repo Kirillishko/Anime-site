@@ -6,27 +6,28 @@
 
 .animeFullInfo {
     display: inline-flex;
-    flex-wrap: wrap;
-    /*background: linear-gradient(to right, white, black);*/
     background-clip: content-box;
     width: 100%;
     color: #212529;
 }
 
-.left-part, .right-part {
-    /*background-color: rgba(255, 255, 255, 0.6);*/
-    /*margin: 1% 5% 5%;*/
-}
-
 .left-part {
+    margin-top: 1.4%;
+    box-sizing: border-box;
     width: 30%;
+    padding: 1%;
+    border: 1px solid rgba(0,0,0,.1);
+    height: fit-content;
 }
 
 .left-part img {
-    width: 70%;
+    display: block;
+    margin: auto;
+    width: 100%;
 }
 
 .right-part {
+    margin-left: 1%;
     width: 70%;
 }
 
@@ -42,28 +43,76 @@
 }
 
 .titles h2 {
+    font-size: 200%;
     margin: 1% 0 0;
 }
 
 .titles h3 {
+    font-size: 90%;
     margin: 0.5%;
     opacity: 0.8;
-}
-
-.info {
-
 }
 
 .info-item {
     display: flex;
 }
 
+.info-item p {
+    margin: 1% 0;
+}
+
 .info-names {
-    /*box-sizing: border-box;*/
+    color: rgba(0,0,0,.6);
     width: 40%;
 }
 
 .info-descriptions {
-    /*box-sizing: border-box;*/
     width: 60%;
+}
+
+.rating-names {
+    color: rgba(0,0,0,.6);
+}
+
+.rating-descriptions {
+    margin-left: auto !important;
+}
+
+.trailer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.84);
+    color: #fff;
+}
+
+.trailer-wrapper {
+    margin: auto;
+    max-width: 70%;
+}
+
+.trailer-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.trailer-item {
+    width: 80%;
+    position: relative;
+    height: 450px;
+}
+
+.trailer-item iframe {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.trailer-categories {
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -32,13 +32,16 @@ const AnimeMain = () => {
     const {data: popularOnWeekAnime, error: errorOnWeek, isLoading: isLoadingOnWeek} = animeApi.useFetchAnimePopularOnWeekQuery(5);
     const {data: popularOngoingAnime, error: errorOngoing, isLoading: isLoadingOngoing} = animeApi.useFetchAnimePopularOngoingQuery({limit: 5, offset: 0});
     const {data: popularUpcomingAnime, error: errorUpcoming, isLoading: isLoadingUpcoming} = animeApi.useFetchAnimePopularUpcomingQuery({limit: 5, offset: 0});
+    const {data: averageRatingAnime, error: errorAverageRating, isLoading: isLoadingAverageRating} = animeApi.useFetchAnimeByAverageRatingQuery({limit: 5, offset: 0});
+    const {data: mostPopularAnime, error: errorMostPopular, isLoading: isLoadingMostPopular} = animeApi.useFetchAnimeMostPopularQuery({limit: 5, offset: 0});
 
     return (
         <div className="animeMain">
             {PlaceAnimeCompilation({data: popularOnWeekAnime, error: errorOnWeek, isLoading: isLoadingOnWeek, title: "Популярное на этой неделе", index: 1})}
             {PlaceAnimeCompilation({data: popularOngoingAnime, error: errorOngoing, isLoading: isLoadingOngoing, title: "Популярное аниме в онгоинге", index: 2})}
             {PlaceAnimeCompilation({data: popularUpcomingAnime, error: errorUpcoming, isLoading: isLoadingUpcoming, title: "Топ предстоящих аниме", index: 3})}
-            {/*}*/}
+            {PlaceAnimeCompilation({data: averageRatingAnime, error: errorAverageRating, isLoading: isLoadingAverageRating, title: "Наиболее оценённые аниме", index: 4})}
+            {PlaceAnimeCompilation({data: mostPopularAnime, error: errorMostPopular, isLoading: isLoadingMostPopular, title: "Самые популярные аниме", index: 5})}
         </div>
     );
 };
