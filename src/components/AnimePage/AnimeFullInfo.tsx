@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {IAnime} from "../../models/Anime/IAnime";
-import Tooltip from "../Tooltip";
+import {formatToCorrectDate} from "../../helpers/dataFormatter";
+import AnimeInfoItem from "./AnimeInfoItem";
 
 interface AnimeFullInfoProps {
     anime: IAnime
@@ -8,26 +9,6 @@ interface AnimeFullInfoProps {
 
 const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
     const {attributes} = anime;
-
-    const locale = new Intl.Locale("ru", {});
-
-    const dateOptions: Intl.DateTimeFormatOptions = {
-        era: "long",                    // "long" | "short" | "narrow"
-        year: "numeric",                // "numeric" | "2-digit"
-        month: "long",                  // "numeric" | "2-digit" | "long" | "short" | "narrow"
-        day: "numeric",                 // "numeric" | "2-digit"
-        weekday: "short",               // "long" | "short" | "narrow"
-        hour: "numeric",                // "numeric" | "2-digit"
-        minute: "numeric",              // "numeric" | "2-digit"
-        second: "numeric",              // "numeric" | "2-digit"
-        timeZoneName: "shortGeneric",   // "long" | "short" | "longGeneric" | "shortOffset" | "longOffset" | "shortGeneric"
-        hour12: false,                  // true | false
-        formatMatcher : "basic",     // "best fit" | "basic"
-    };
-
-    const ruDate = Intl.DateTimeFormat(locale.toString(), dateOptions);
-
-    const time = ruDate.format(new Date(attributes.createdAt))
 
     return (
         <div className={"animeFullInfo"}>
@@ -43,13 +24,47 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                 <hr/>
                 <div className={"info-item"}>
                     <p className={"info-names"}>Следующий эпизод</p>
-                    <p className={"info-descriptions"}>Кам</p>
+                    <p className={"info-descriptions"}>{formatToCorrectDate(attributes.nextRelease)}</p>
                 </div>
                 <hr/>
                 <div className={"info"}>
                     <div className={"info-item"}>
+                        <p className={"info-names"}>Тип</p>
+                        <p className={"info-descriptions"}>{attributes.showType}</p>
+                    </div>
+                    <div className={"info-item"}>
+                        <p className={"info-names"}>Статус</p>
+                        <p className={"info-descriptions"}>{attributes.status}</p>
+                    </div>
+                    <div className={"info-item"}>
+                        <p className={"info-names"}>Выпуск</p>
+                        <p className={"info-descriptions"}>{formatToCorrectDate(attributes.startDate)}</p>
+                    </div>
+                    <div className={"info-item"}>
+                        <p className={"info-names"}>Рейтинг MPAA</p>
+                        <p className={"info-descriptions"}>{attributes.ageRating}</p>
+                    </div>
+                    <div className={"info-item"}>
+                        <p className={"info-names"}>ageRatingGuide</p>
+                        <p className={"info-descriptions"}>{attributes.ageRatingGuide}</p>
+                    </div>
+                    {attributes.episodeLength &&
+                        <AnimeInfoItem name={`Длительность`}
+                                       description={`${attributes.episodeLength} мин. ~ серия`}/>
+                    }
+                    <AnimeInfoItem name={`Полный просмотр`}
+                                   description={`~ ${attributes.totalLength} мин.`}/>
+                    <div className={"info-item"}>
+                        <p className={"info-names"}>Длительность</p>
+                        <p className={"info-descriptions"}>{attributes.episodeLength} мин. ~ серия</p>
+                    </div>
+                    <div className={"info-item"}>
+                        <p className={"info-names"}>Полный просмотр</p>
+                        <p className={"info-descriptions"}>~ {attributes.totalLength} мин.</p>
+                    </div>
+                    <div className={"info-item"}>
                         <p className={"info-names"}>createdAt</p>
-                        <p className={"info-descriptions"}>{time}</p>
+                        <p className={"info-descriptions"}>{formatToCorrectDate(attributes.createdAt)}</p>
                     </div>
                     <div className={"info-item"}>
                         <p className={"info-names"}>createdAt</p>
@@ -76,10 +91,6 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                         <p className={"info-descriptions"}>{attributes.favoritesCount}</p>
                     </div>
                     <div className={"info-item"}>
-                        <p className={"info-names"}>startDate</p>
-                        <p className={"info-descriptions"}>{attributes.startDate}</p>
-                    </div>
-                    <div className={"info-item"}>
                         <p className={"info-names"}>endDate</p>
                         <p className={"info-descriptions"}>{attributes.endDate}</p>
                     </div>
@@ -96,20 +107,8 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                         <p className={"info-descriptions"}>{attributes.ratingRank}</p>
                     </div>
                     <div className={"info-item"}>
-                        <p className={"info-names"}>ageRating</p>
-                        <p className={"info-descriptions"}>{attributes.ageRating}</p>
-                    </div>
-                    <div className={"info-item"}>
-                        <p className={"info-names"}>ageRatingGuide</p>
-                        <p className={"info-descriptions"}>{attributes.ageRatingGuide}</p>
-                    </div>
-                    <div className={"info-item"}>
                         <p className={"info-names"}>subtype</p>
                         <p className={"info-descriptions"}>{attributes.subtype}</p>
-                    </div>
-                    <div className={"info-item"}>
-                        <p className={"info-names"}>status</p>
-                        <p className={"info-descriptions"}>{attributes.status}</p>
                     </div>
                     <div className={"info-item"}>
                         <p className={"info-names"}>tba</p>
@@ -119,21 +118,10 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                         <p className={"info-names"}>episodeCount</p>
                         <p className={"info-descriptions"}>{attributes.episodeCount}</p>
                     </div>
-                    <div className={"info-item"}>
-                        <p className={"info-names"}>Длительность</p>
-                        <p className={"info-descriptions"}>{attributes.episodeLength}</p>
-                    </div>
-                    <div className={"info-item"}>
-                        <p className={"info-names"}>totalLength</p>
-                        <p className={"info-descriptions"}>{attributes.totalLength}</p>
-                    </div>
+
                     <div className={"info-item"}>
                         <p className={"info-names"}>youtubeVideoId</p>
                         <p className={"info-descriptions"}>{attributes.youtubeVideoId}</p>
-                    </div>
-                    <div className={"info-item"}>
-                        <p className={"info-names"}>showType</p>
-                        <p className={"info-descriptions"}>{attributes.showType}</p>
                     </div>
                     <div className={"info-item"}>
                         <p className={"info-names"}>nsfw</p>
