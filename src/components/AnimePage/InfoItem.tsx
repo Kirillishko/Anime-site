@@ -7,6 +7,9 @@ interface AnimeInfoItemProps {
 }
 
 const InfoItem: FC<AnimeInfoItemProps> = ({name, description, type}) => {
+    if (description == "null")
+        return null;
+
     if (type == "information") {
         return (
             <div className={"info-item"}>
