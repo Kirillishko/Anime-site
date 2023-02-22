@@ -11,7 +11,9 @@ const Header = () => {
                         <Link to={`/`} className={"link"}>
                             <h1>NiBeNiMe</h1>
                         </Link>
-                        <p>Аниме</p>
+                        <Link to={'/search'} className={"link"}>
+                            <p>Поиск</p>
+                        </Link>
                     </div>
                     <div className={"rightSubHeader"}>
                         <a href={""} target={"_blank"}>

@@ -1,0 +1,30 @@
+.search-page {
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: row;
+}
+
+.search-left {
+    width: 80%;
+}
+
+.search-right {
+    width: 20%;
+}
+
+.search-input {
+
+}
+
+.search-categories {
+
+}
+
+.search-content {
+    /*ff5c57*/
+}
+
+.MuiSlider[color="primary"] {
+    colorPrimary : #ff5c57;
+    colorSecondary : #b39797;
+}
