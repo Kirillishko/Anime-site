@@ -64,6 +64,7 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                               type={"information"}/>
                     <InfoItem name={`Рейтинг MPAA`}
                               description={`${attributes.ageRating}`}
+                              descriptionTip={`${attributes.ageRatingGuide}`}
                               type={"information"}/>
                     <InfoItem name={`ageRatingGuide`}
                               description={`${attributes.ageRatingGuide}`}
@@ -84,5 +85,24 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
         </div>
     );
 };
+
+export const findOdd = (xs: number[]): number => {
+    let checkedNumbers:number[][] = [[]];
+    let count = 0;
+
+    xs.forEach(value => {
+        if (checkedNumbers.includes(value)) {
+            count++;
+        } else {
+            if (count % 2 == 1)
+                return value;
+
+            checkedNumbers.push(value);
+            count++;
+        }
+    })
+    return 0;
+};
+
 
 export default AnimeFullInfo;

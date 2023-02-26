@@ -1,11 +1,22 @@
+.tooltip {
+    position: relative;
+}
+
 .tooltipText {
     visibility: hidden;
 }
 
 .tooltip:hover .tooltipText {
+    position: absolute;
     visibility: visible;
+    width: fit-content;
+    background-color: red;
 }
 
-.tooltipText::after {
-    content: "";
-}
+/*.tooltipText::after {*/
+/*    display: block;*/
+/*    width: fit-content;*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: 5px;*/
+/*}*/

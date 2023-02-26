@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {IAnimeData} from "../../models/Anime/IAnimeData";
 import {IAnime} from "../../models/Anime/IAnime";
 import {animeApi} from "../../services/AnimeService";
+import {getCategoryTranslate} from "../../translate/CategoriesTranslate";
 
 interface TrailerProps {
     anime: IAnime,
@@ -24,7 +25,7 @@ const Trailer:FC<TrailerProps> = ({anime}) => {
                         {isLoading && <p>Идёт загрузка...</p>}
                         {error && <p>Ошибка при загрузке</p>}
                         {categories && categories.data.map((anime) =>
-                            <p key={anime.id}>{anime.attributes.title}</p>
+                            <p key={anime.id}>{getCategoryTranslate(anime.attributes.title)}</p>
                         )}
                     </div>
                 </div>

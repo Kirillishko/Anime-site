@@ -4,6 +4,7 @@ import {IPagination} from "../models/IPagination";
 import {IAnime} from "../models/Anime/IAnime";
 import {IAnimeData} from "../models/Anime/IAnimeData";
 import {ICategories} from "../models/Anime/Category/ICategories";
+import {ISearch} from "../models/ISearch";
 
 
 export const animeApi = createApi({
@@ -88,6 +89,18 @@ export const animeApi = createApi({
         fetchAnimeCategoriesById: build.query<ICategories, string>({
             query: (id) => ({
                 url: `/anime/${id}/categories`
+            })
+        }), // https://kitsu.io/api/edge/anime/43845/categories
+        fetchAnimeSearch: build.query<IAnimeDatas, ISearch>({
+            query: ({pagination, title, categories, sort}) => ({
+                url: `/anime`,
+                params: {
+                    'page[limit]': pagination.limit,
+                    'page[offset]': pagination.offset,
+                    'filter[text]': title,
+                    'filter[categories]': categories,
+                    'sort': sort,
+                }
             })
         }), // https://kitsu.io/api/edge/anime/43845/categories
     })

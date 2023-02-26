@@ -4,12 +4,13 @@ import "../styles/tooltip.css"
 interface TooltipProps {
     text: string,
     tip: string,
+    className: string,
 }
 
-const Tooltip:FC<TooltipProps> = ({text, tip}) => {
+const Tooltip:FC<TooltipProps> = ({text, tip, className}) => {
     return (
         <div className={"tooltip"}>
-            <p>{text}</p>
+            <p className={className}>{text}</p>
             <span className={"tooltipText"}>{tip}</span>
         </div>
     );
