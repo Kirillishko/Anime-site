@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {IAnime} from "../../models/Anime/IAnime";
 import {formatToCorrectDate} from "../../helpers/dataFormatter";
 import InfoItem from "./InfoItem";
+import {getShowTypeTranslate, getStatusTranslate} from "../../translate/Translates";
 
 interface AnimeFullInfoProps {
     anime: IAnime
@@ -54,10 +55,10 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                 <hr/>
                 <div className={"info"}>
                     <InfoItem name={`Тип`}
-                              description={`${attributes.showType}`}
+                              description={`${getShowTypeTranslate(attributes.showType)}`}
                               type={"information"}/>
                     <InfoItem name={`Статус`}
-                              description={`${attributes.status}`}
+                              description={`${getStatusTranslate(attributes.status)}`}
                               type={"information"}/>
                     <InfoItem name={`Выпуск`}
                               description={`${formatToCorrectDate(attributes.startDate)}`}
@@ -85,24 +86,5 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
         </div>
     );
 };
-
-export const findOdd = (xs: number[]): number => {
-    let checkedNumbers:number[][] = [[]];
-    let count = 0;
-
-    xs.forEach(value => {
-        if (checkedNumbers.includes(value)) {
-            count++;
-        } else {
-            if (count % 2 == 1)
-                return value;
-
-            checkedNumbers.push(value);
-            count++;
-        }
-    })
-    return 0;
-};
-
 
 export default AnimeFullInfo;

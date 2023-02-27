@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {IAnimeData} from "../../models/Anime/IAnimeData";
 import {IAnime} from "../../models/Anime/IAnime";
 import {animeApi} from "../../services/AnimeService";
-import {getCategoryTranslate} from "../../translate/CategoriesTranslate";
+import {getCategoryTranslate} from "../../translate/Translates";
 
 interface TrailerProps {
     anime: IAnime,
