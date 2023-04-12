@@ -16,13 +16,14 @@ const SearchPage = () => {
                         variant="filled"
                     />
                 </div>
-                <div className={"search-content"}>Контент</div>
+                <div className={"search-content"}></div>
             </div>
             <div className={"search-right"}>
                 <div className={"search-categories"}>
                     <Dropdown label={"Жанры"} items={categoriesTranslateArray}/>
                     <Dropdown label={"Тип"} items={showTypesTranslateArray}/>
                     <Dropdown label={"Статус"} items={statusTranslateArray}/>
+
                 </div>
             </div>
         </div>
