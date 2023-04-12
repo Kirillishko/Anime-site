@@ -6,7 +6,7 @@ import {
     InputLabel, ListItemText, MenuItem,
     OutlinedInput,
     Select,
-    SelectChangeEvent,
+    SelectChangeEvent, Theme,
     ThemeProvider
 } from "@mui/material";
 import {categoriesTranslateArray} from "../../translate/Translates";
@@ -40,42 +40,29 @@ const Dropdown:FC<DropdownProps> = ({label, items}) => {
         );
     };
 
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#ffa6a3',
-            },
-            secondary: {
-                main: '#495057'
-            }
-        },
-    });
-
     return (
         <div>
-            <ThemeProvider theme={theme}>
-                <FormControl sx={{ m: 1, width: 300 }}>
-                    <InputLabel color={"secondary"}>{label}</InputLabel>
-                    <Select
-                        multiple
-                        value={selectedItems}
-                        onChange={handleChange}
-                        input={<OutlinedInput label={label}/>}
-                        renderValue={(selected) => {
-                            selected = selected.sort();
-                            return selected.join(', ')}
-                        }
-                        MenuProps={MenuProps}
-                    >
-                        {items.map((item) => (
-                            <MenuItem key={item[1]} value={item[1]}>
-                                <Checkbox checked={selectedItems.indexOf(item[1]) > -1} />
-                                <ListItemText primary={item[1]} />
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-            </ThemeProvider>
+            <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel color={"secondary"}>{label}</InputLabel>
+                <Select
+                    multiple
+                    value={selectedItems}
+                    onChange={handleChange}
+                    input={<OutlinedInput label={label}/>}
+                    renderValue={(selected) => {
+                        selected = selected.sort();
+                        return selected.join(', ')}
+                    }
+                    MenuProps={MenuProps}
+                >
+                    {items.map((item) => (
+                        <MenuItem key={item[1]} value={item[1]}>
+                            <Checkbox checked={selectedItems.indexOf(item[1]) > -1} />
+                            <ListItemText primary={item[1]} />
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
         </div>
     );
 };
