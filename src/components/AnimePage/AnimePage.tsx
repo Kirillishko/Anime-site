@@ -6,12 +6,13 @@ import {IAnimeDatas} from "../../models/Anime/IAnimeDatas";
 import {IAnimeData} from "../../models/Anime/IAnimeData";
 import Trailer from "./Trailer";
 
-const Place = (anime?: IAnimeData) => {
-    if (anime) {
+const Place = (animeData?: IAnimeData) => {
+    if (animeData) {
+        console.log(animeData);
         return (
             <div>
-                <AnimeFullInfo anime={anime.data}/>
-                <Trailer anime={anime.data}/>
+                <AnimeFullInfo anime={animeData.data}/>
+                <Trailer animeData={animeData}/>
             </div>
         )
     }
@@ -20,9 +21,6 @@ const Place = (anime?: IAnimeData) => {
 const AnimePage = () => {
     const {id} = useParams();
     const {data: anime, error, isLoading} = animeApi.useFetchAnimeByIdQuery(String(id));
-
-    console.log(`oneAnime = ${anime}`);
-    console.log(anime);
 
     return (
         <div className={"animePage"}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, ChangeEventHandler} from 'react';
 import {
     createTheme,
     FormControl,
@@ -10,7 +10,18 @@ import {
     ThemeProvider
 } from "@mui/material";
 import Dropdown from "./Dropdown";
-import {categoriesTranslateArray, showTypesTranslateArray, statusTranslateArray} from "../../translate/Translates";
+import {
+    categoriesTranslateArray,
+    sortTranslateArray,
+    showTypesTranslateArray,
+    statusTranslateArray
+} from "../../translate/Translates";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {setTitle, setPagination, setResult} from "../../store/reducers/SearchLineSlice";
+import {SelectChangeEvent} from "@mui/material/Select";
+import {IAnimeDatas} from "../../models/Anime/IAnimeDatas";
+import {animeApi} from "../../services/AnimeService";
+import AnimePreview from "./AnimePreview";
 
 const SearchPage = () => {
 
@@ -36,6 +47,31 @@ const SearchPage = () => {
         },
     };
 
+    const [searchTitle, setSearchTitle] = React.useState("");
+    const {search, result} = useAppSelector(state => state.searchLineReducer);
+    const {title, sort, pagination, status, showType, categories} = search;
+    const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSearchTitle(value);
+        setTitle(value);
+
+        updateContent();
+    }
+
+    let error, loading;
+
+    const updateContent = () => {
+        const {data, error: lerror, isLoading} =
+            animeApi.useFetchAnimeSearchQuery({title, sort, pagination, status, showType, categories});
+
+        error = lerror;
+        loading = isLoading;
+        if (data)
+            setResult(data);
+    }
+
+    updateContent();
+
     return (
         <div className={"search-page"}>
             <div className={"search-left"}>
@@ -45,22 +81,18 @@ const SearchPage = () => {
                     </div>
                     <div className={"search-top-right"}>
                         <ThemeProvider theme={theme}>
-                            <FormControl sx={{m: 1, width: 300}}>
-                                <InputLabel color={"secondary"}>Сортировка</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    input={<OutlinedInput label="Сотировка"/>}
-                                >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                </Select>
-                            </FormControl>
+                            <Dropdown label={"Сортировка"} items={sortTranslateArray}
+                                      multiple={false} action={"setSort"}/>
                         </ThemeProvider>
                     </div>
                 </div>
-                <div className={"search-content"}>Контент</div>
+                <div className={"search-content"}>
+                    {error && "Ошибка"}
+                    {loading && "Загрузка..."}
+                    {result && result.map(value =>
+                        <AnimePreview animeData={value}/>
+                    )}
+                </div>
             </div>
             <div className={"search-right"}>
                 <div className={"search-categories"}>
@@ -71,11 +103,13 @@ const SearchPage = () => {
                                 label="Поиск"
                                 type="search"
                                 variant="filled"
+                                value={searchTitle}
+                                onChange={onChangeTitle}
                             />
                         </FormControl>
-                        <Dropdown label={"Жанры"} items={categoriesTranslateArray}/>
-                        <Dropdown label={"Тип"} items={showTypesTranslateArray}/>
-                        <Dropdown label={"Статус"} items={statusTranslateArray}/>
+                        <Dropdown label={"Жанры"} items={categoriesTranslateArray} multiple={true} action={"setCategories"}/>
+                        <Dropdown label={"Тип"} items={showTypesTranslateArray} multiple={true} action={"setShowType"}/>
+                        <Dropdown label={"Статус"} items={statusTranslateArray} multiple={true} action={"setStatus"}/>
                     </ThemeProvider>
                 </div>
             </div>

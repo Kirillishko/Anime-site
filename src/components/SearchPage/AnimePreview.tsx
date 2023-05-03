@@ -2,13 +2,15 @@ import React, {FC} from 'react';
 import {IAnime} from "../../models/Anime/IAnime";
 import {animeApi} from "../../services/AnimeService";
 import {getCategoryTranslate} from "../../translate/Translates";
+import {IAnimeData} from "../../models/Anime/IAnimeData";
 
 interface IAnimePreviewProps {
-    anime: IAnime;
+    animeData: IAnimeData;
 }
 
-const AnimePreview:FC<IAnimePreviewProps> = ({anime}) => {
-    const {data: categories, error, isLoading} = animeApi.useFetchAnimeCategoriesByIdQuery(anime.id);
+const AnimePreview:FC<IAnimePreviewProps> = ({animeData}) => {
+    const anime = animeData.data;
+    const categories = animeData.included;
 
     return (
         <div className={"animePreview"}>
@@ -20,8 +22,8 @@ const AnimePreview:FC<IAnimePreviewProps> = ({anime}) => {
                 <h3>{anime.attributes.titles.en}</h3>
                 <h3>{anime.attributes.titles.ja_jp}</h3>
                 <p>{anime.attributes.showType} / {anime.attributes.startDate} /
-                    {categories && categories.data.map((anime) =>
-                    getCategoryTranslate(anime.attributes.title))}
+                    {categories && categories.map((category) =>
+                    getCategoryTranslate(category.attributes.title))}
                 </p>
                 <p>{anime.attributes.description}</p>
             </div>

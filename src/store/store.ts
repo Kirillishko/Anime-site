@@ -1,9 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {animeApi} from "../services/AnimeService";
-
+import {SearchLineSliceReducer} from "./reducers/SearchLineSlice";
 
 const rootReducer = combineReducers({
-    [animeApi.reducerPath] : animeApi.reducer
+    [animeApi.reducerPath] : animeApi.reducer,
+    searchLineReducer: SearchLineSliceReducer,
 })
 
 export const setupStore = () => {

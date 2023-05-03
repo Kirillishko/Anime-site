@@ -171,7 +171,7 @@ const categoriesTranslate = new Map([
         // ["school-clubs", "Школьные клубы"],
         ["school-life", "Школьная жизнь"],
         ["science-fiction", "Научная фантастика"],
-        ["seinen", "Сёнэн"],
+        ["seinen", "Сэйнэн"],
         // ["sengoku-period", "Период Сэнгоку"],
         // ["setting", "Сеттинг"],
         // ["sex", "Секс"],
@@ -269,6 +269,13 @@ const ageRatingsTranslate = new Map([
         ["R", "R"],
 ]);
 
+const sortTranslate = new Map([
+    ["-user_count", "Популярность"],
+    ["-average_rating", "Средняя оценка"],
+    ["-start_date", "Дата"],
+    ["-created_at", "Недавно добавленные"],
+]);
+
 const sort = (n1 : string[], n2: string[]) => {
     if (n1[1] > n2[1]) {
         return 1;
@@ -302,8 +309,16 @@ export const getStatusTranslate = (status: string): string => {
         return statusTranslate.get(status.replace(/\s/g, "-").toLowerCase())!;
 }
 
+export const getSortTranslate = (sort: string): string => {
+    if (sort === undefined)
+        return "error";
+
+    return sortTranslate.get(sort.replace(/\s/g, "-").toLowerCase())!;
+}
+
 export const categoriesTranslateArray = Array.from(categoriesTranslate).sort(sort);
 export const showTypesTranslateArray = Array.from(showTypesTranslate).sort(sort);
 export const statusTranslateArray = Array.from(statusTranslate).sort(sort);
 export const ageRatingsTranslateArray = Array.from(ageRatingsTranslate).sort(sort);
+export const sortTranslateArray = Array.from(sortTranslate).sort(sort);
 

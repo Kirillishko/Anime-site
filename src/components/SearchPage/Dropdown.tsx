@@ -1,22 +1,31 @@
 import React, {FC} from 'react';
 import {
     Checkbox,
-    createTheme,
     FormControl,
     InputLabel, ListItemText, MenuItem,
     OutlinedInput,
     Select,
-    SelectChangeEvent, Theme,
-    ThemeProvider
+    SelectChangeEvent
 } from "@mui/material";
-import {categoriesTranslateArray} from "../../translate/Translates";
+import {useAppDispatch} from "../../hooks/redux";
+import {setTitle, setCategories, setStatus, setShowType, setSort} from "../../store/reducers/SearchLineSlice";
 
 interface DropdownProps {
     label: string,
     items: string[][],
+    multiple: boolean,
+    action: "setTitle" | "setCategories" | "setStatus" | "setShowType" | "setSort"
 }
 
-const Dropdown:FC<DropdownProps> = ({label, items}) => {
+const actions = {
+    setTitle: setTitle,
+    setSort: setSort,
+    setCategories: setCategories,
+    setStatus: setStatus,
+    setShowType: setShowType,
+}
+
+const Dropdown:FC<DropdownProps> = ({label, items, multiple, action}) => {
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -29,15 +38,24 @@ const Dropdown:FC<DropdownProps> = ({label, items}) => {
     };
 
     const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
+    const dispatch = useAppDispatch();
 
     const handleChange = (event: SelectChangeEvent<typeof selectedItems>) => {
-        const {
+        let {
             target: { value },
         } = event;
 
         setSelectedItems(
             typeof value === 'string' ? value.split(',') : value,
         );
+
+        value = value.toString();
+
+        if (actions[action]) {
+            dispatch(actions[action](value));
+        }
+
+        console.log(selectedItems);
     };
 
     return (
@@ -45,8 +63,8 @@ const Dropdown:FC<DropdownProps> = ({label, items}) => {
             <FormControl sx={{ m: 1, width: 300 }}>
                 <InputLabel color={"secondary"}>{label}</InputLabel>
                 <Select
-                    multiple
-                    value={selectedItems}
+                    multiple={multiple}
+                    value={(!multiple && selectedItems.length === 0) ? [items[0][1]] : selectedItems}
                     onChange={handleChange}
                     input={<OutlinedInput label={label}/>}
                     renderValue={(selected) => {
@@ -57,8 +75,9 @@ const Dropdown:FC<DropdownProps> = ({label, items}) => {
                 >
                     {items.map((item) => (
                         <MenuItem key={item[1]} value={item[1]}>
-                            <Checkbox checked={selectedItems.indexOf(item[1]) > -1} />
-                            <ListItemText primary={item[1]} />
+                            {multiple && <Checkbox checked={selectedItems.indexOf(item[1]) > -1} />}
+                            {/*<ListItemText primary={item[1]} />*/}
+                            {item[1]}
                         </MenuItem>
                     ))}
                 </Select>

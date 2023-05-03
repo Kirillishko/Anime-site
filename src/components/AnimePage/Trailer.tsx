@@ -5,13 +5,13 @@ import {animeApi} from "../../services/AnimeService";
 import {getCategoryTranslate} from "../../translate/Translates";
 
 interface TrailerProps {
-    anime: IAnime,
+    animeData: IAnimeData,
 }
 
-const Trailer:FC<TrailerProps> = ({anime}) => {
-
-    const {data: categories, error, isLoading} = animeApi.useFetchAnimeCategoriesByIdQuery(anime.id);
-    const src = `https://www.youtube.com/embed/${anime.attributes.youtubeVideoId}`;
+const Trailer:FC<TrailerProps> = ({animeData}) => {
+    const anime = animeData.data;
+    const categories = animeData.included;
+    const youtubeSrc = `https://www.youtube.com/embed/${anime.attributes.youtubeVideoId}`;
 
     return (
         <div className={"trailer"}>
@@ -19,13 +19,11 @@ const Trailer:FC<TrailerProps> = ({anime}) => {
                 <h1>Смотреть трейлер «{anime.attributes.canonicalTitle}»</h1>
                 <div className={"trailer-content"}>
                     <div className="trailer-item">
-                        <iframe src= {src} seamless={true} loading={"lazy"}  frameBorder={"none"} allowFullScreen/>
+                        <iframe src= {youtubeSrc} seamless={true} loading={"lazy"}  frameBorder={"none"} allowFullScreen/>
                     </div>
                     <div className="trailer-categories">
-                        {isLoading && <p>Идёт загрузка...</p>}
-                        {error && <p>Ошибка при загрузке</p>}
-                        {categories && categories.data.map((anime) =>
-                            <p key={anime.id}>{getCategoryTranslate(anime.attributes.title)}</p>
+                        {categories && categories.map((category) =>
+                            <p key={category.id}>{getCategoryTranslate(category.attributes.title)}</p>
                         )}
                     </div>
                 </div>
