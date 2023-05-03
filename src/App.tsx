@@ -18,6 +18,7 @@ function App() {
                   <Route index element={<AnimeMain/>}/>
                   <Route path={"/anime/:id"} element={<AnimePage/>}/>
                   <Route path={"/search"} element={<SearchPage/>}/>
+                  <Route path={"/search/filter/:filter"} element={<SearchPage/>}/>
                   <Route path={"*"} element={<Navigate to={"/"} replace/>}/>
               </Route>
           </Routes>

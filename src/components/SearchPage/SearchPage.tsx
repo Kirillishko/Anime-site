@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler} from 'react';
+import React, {ChangeEvent, ChangeEventHandler, useEffect} from 'react';
 import {
     createTheme,
     FormControl,
@@ -22,9 +22,10 @@ import {SelectChangeEvent} from "@mui/material/Select";
 import {IAnimeDatas} from "../../models/Anime/IAnimeDatas";
 import {animeApi} from "../../services/AnimeService";
 import AnimePreview from "./AnimePreview";
+import {useNavigate, useParams} from "react-router-dom";
+import formatSearchToString from "../../helpers/searchFormatter";
 
 const SearchPage = () => {
-
     const theme = createTheme({
         palette: {
             primary: {
@@ -47,30 +48,40 @@ const SearchPage = () => {
         },
     };
 
+    const {filter} = useParams();
+    const navigate = useNavigate();
     const [searchTitle, setSearchTitle] = React.useState("");
     const {search, result} = useAppSelector(state => state.searchLineReducer);
-    const {title, sort, pagination, status, showType, categories} = search;
+
     const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchTitle(value);
         setTitle(value);
-
-        updateContent();
     }
 
-    let error, loading;
+    let data, error, isLoading;
 
-    const updateContent = () => {
-        const {data, error: lerror, isLoading} =
-            animeApi.useFetchAnimeSearchQuery({title, sort, pagination, status, showType, categories});
+    const formattedSearch = formatSearchToString(search);
+    console.log("formattedSearch: " + formattedSearch);
+    console.log("filter: " + filter + "   " + (formattedSearch === filter));
 
-        error = lerror;
-        loading = isLoading;
-        if (data)
-            setResult(data);
+    let toUpdate = false;
+
+    if (formattedSearch === filter) {
+        const result = animeApi.useFetchAnimeSearchStraightQuery(formattedSearch);
+        data = result.data;
+        error = result.error;
+        isLoading = result.isLoading;
+    } else {
+        // toUpdate = true;
     }
 
-    updateContent();
+    useEffect(() => {
+        navigate(`/search/filter/${formattedSearch}`, {replace: true});
+        toUpdate = false;
+    }, [toUpdate]);
+
+    console.log("data: " + data);
 
     return (
         <div className={"search-page"}>
@@ -88,8 +99,8 @@ const SearchPage = () => {
                 </div>
                 <div className={"search-content"}>
                     {error && "Ошибка"}
-                    {loading && "Загрузка..."}
-                    {result && result.map(value =>
+                    {isLoading && "Загрузка..."}
+                    {Array.isArray(data) && data.data.map(value =>
                         <AnimePreview animeData={value}/>
                     )}
                 </div>
