@@ -92,7 +92,7 @@ export const animeApi = createApi({
                 url: `/anime/${id}/categories`
             })
         }), // https://kitsu.io/api/edge/anime/43845/categories
-        fetchAnimeSearch: build.query<IAnimeDatasCategories, ISearch>({
+        fetchAnimeSearch: build.query<IAnimeData[], ISearch>({
             query: ({pagination, title, categories, sort}) => ({
                 url: `/anime`,
                 params: {
@@ -104,7 +104,7 @@ export const animeApi = createApi({
                 }
             })
         }), // https://kitsu.io/api/edge/anime/43845/categories
-        fetchAnimeSearchStraight: build.query<IAnimeDatasCategories, string>({
+        fetchAnimeSearchStraight: build.query<IAnimeData[], string>({
             query: (url) => ({
                 url: `/anime?${url}`
             })

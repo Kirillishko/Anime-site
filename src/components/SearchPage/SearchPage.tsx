@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler, useEffect} from 'react';
+import React, {ChangeEvent, ChangeEventHandler, memo, useEffect, useState} from 'react';
 import {
     createTheme,
     FormControl,
@@ -48,40 +48,53 @@ const SearchPage = () => {
         },
     };
 
+    const dispatch = useAppDispatch();
+
     const {filter} = useParams();
     const navigate = useNavigate();
     const [searchTitle, setSearchTitle] = React.useState("");
     const {search, result} = useAppSelector(state => state.searchLineReducer);
-
+    const {title, status, sort, showType, categories, pagination} = search;
+    const formattedSearch = formatSearchToString(search);
+    const [getData, {data, isFetching, error}] = animeApi.useLazyFetchAnimeSearchStraightQuery();
     const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
+        // console.log(value);
+
         setSearchTitle(value);
-        setTitle(value);
+        dispatch(setTitle(value));
+
+        // console.log(title);
     }
 
-    let data, error, isLoading;
+    // console.log("formattedSearch: " + formattedSearch);
+    // console.log("filter: " + filter + "   " + (formattedSearch === filter));
 
-    const formattedSearch = formatSearchToString(search);
-    console.log("formattedSearch: " + formattedSearch);
-    console.log("filter: " + filter + "   " + (formattedSearch === filter));
+    const [fullFilled, setFullFilled] = useState(false);
 
-    let toUpdate = false;
+    const cum2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+          // console.log("1");
+      }, 1000);
+    });
 
-    if (formattedSearch === filter) {
-        const result = animeApi.useFetchAnimeSearchStraightQuery(formattedSearch);
-        data = result.data;
-        error = result.error;
-        isLoading = result.isLoading;
-    } else {
-        // toUpdate = true;
-    }
+    let cum1 = setTimeout(() => {
+        navigate(`/search/filter/${formattedSearch}`, {replace: true});
+        console.log("update");
+        getData(formattedSearch);
+    }, 3000);
+
 
     useEffect(() => {
-        navigate(`/search/filter/${formattedSearch}`, {replace: true});
-        toUpdate = false;
-    }, [toUpdate]);
+        clearTimeout(cum1);
+        cum1 = setTimeout(() => {
+            navigate(`/search/filter/${formattedSearch}`, {replace: true});
+            console.log("update");
+            getData(formattedSearch);
+        }, 1000)
+    }, [title, status, sort, showType, categories, pagination]);
 
-    console.log("data: " + data);
+    // console.log(data);
 
     return (
         <div className={"search-page"}>
@@ -99,8 +112,8 @@ const SearchPage = () => {
                 </div>
                 <div className={"search-content"}>
                     {error && "Ошибка"}
-                    {isLoading && "Загрузка..."}
-                    {Array.isArray(data) && data.data.map(value =>
+                    {isFetching && "Загрузка..."}
+                    {Array.isArray(data) && data.map(value =>
                         <AnimePreview animeData={value}/>
                     )}
                 </div>
