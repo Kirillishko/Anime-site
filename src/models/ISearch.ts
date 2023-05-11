@@ -6,6 +6,6 @@ export interface ISearch {
     title: string,
     categories: string,
     status: string,
-    showType: string,
+    ageRating: string,
     sort: string,
 }

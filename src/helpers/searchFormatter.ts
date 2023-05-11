@@ -1,9 +1,21 @@
 import {ISearch} from "../models/ISearch";
+import {
+    getAgeRatingsTranslate,
+    getCategoryTranslate,
+    getShowTypeTranslate,
+    getSortTranslate,
+    getStatusTranslate
+} from "../translate/Translates";
 
 const formatSearchToString = (search: ISearch) => {
-    const {pagination, title, categories, status, showType, sort} = search;
-    let paginationPart, titlePart, categoriesPart, statusPart, showTypePart, sortPart;
-    paginationPart = titlePart = categoriesPart = statusPart = showTypePart = sortPart = "";
+    let {pagination, title, categories, status, ageRating, sort} = search;
+    let paginationPart, titlePart, categoriesPart, statusPart, ageRatingPart, sortPart;
+    paginationPart = titlePart = categoriesPart = statusPart = ageRatingPart = sortPart = "";
+
+    categories = categories.split(",").map(value => getCategoryTranslate(value)).toString();
+    status = status.split(",").map(value => getStatusTranslate(value)).toString();
+    ageRating = ageRating.split(",").map(value => getAgeRatingsTranslate(value)).toString();
+    sort = sort.split(",").map(value => getSortTranslate(value)).toString();
 
     if (pagination)
         paginationPart = `page[limit]=${pagination.limit}&page[offset]=${pagination.offset}&`;
@@ -17,13 +29,13 @@ const formatSearchToString = (search: ISearch) => {
     if (status)
         statusPart = `filter[status]=${status}&`;
 
-    if (status)
-        showTypePart = `filter[showType]=${showType}&`;
+    if (ageRating)
+        ageRatingPart = `filter[ageRating]=${ageRating}&`;
 
     if (sort)
-        sortPart = `sort=-${sort}&`;
+        sortPart = `sort=${sort}&`;
 
-    const result = paginationPart + titlePart + categoriesPart + statusPart + showTypePart + sortPart + "include=categories";
+    const result = (paginationPart + titlePart + categoriesPart + statusPart + ageRatingPart + sortPart).slice(0, -1);
 
     return result;
 }

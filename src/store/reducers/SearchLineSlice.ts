@@ -12,12 +12,12 @@ interface ISearchLine {
 }
 
 const initialState: ISearchLine = {
-    search: {pagination: {limit: 1, offset: 0},
+    search: {pagination: {limit: 10, offset: 0},
             title: "",
             categories: "",
             status: "",
-            showType: "",
-            sort: "",},
+            ageRating: "",
+            sort: "Недавно добавленные",},
     result: [],
     fullLine: "",
 }
@@ -42,8 +42,8 @@ const SearchLineSlice = createSlice({
             state.search.status = action.payload;
             state.fullLine = formatSearchToString(state.search);
         },
-        setShowType(state, action: PayloadAction<string>) {
-            state.search.showType = action.payload;
+        setAgeRating(state, action: PayloadAction<string>) {
+            state.search.ageRating = action.payload;
             state.fullLine = formatSearchToString(state.search);
         },
         setSort(state, action: PayloadAction<string>) {
@@ -56,5 +56,5 @@ const SearchLineSlice = createSlice({
     }
 })
 
-export const {setPagination, setTitle, setCategories, setStatus, setShowType, setSort, setResult} = SearchLineSlice.actions;
+export const {setPagination, setTitle, setCategories, setStatus, setAgeRating, setSort, setResult} = SearchLineSlice.actions;
 export const SearchLineSliceReducer = SearchLineSlice.reducer;

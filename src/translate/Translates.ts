@@ -270,10 +270,10 @@ const ageRatingsTranslate = new Map([
 ]);
 
 const sortTranslate = new Map([
+    ["-created_at", "Недавно добавленные"],
+    ["-start_date", "Дата"],
     ["-user_count", "Популярность"],
     ["-average_rating", "Средняя оценка"],
-    ["-start_date", "Дата"],
-    ["-created_at", "Недавно добавленные"],
 ]);
 
 const sort = (n1 : string[], n2: string[]) => {
@@ -288,37 +288,47 @@ const sort = (n1 : string[], n2: string[]) => {
     return 0;
 };
 
-export const getCategoryTranslate = (category: string): string => {
-    if (category === undefined)
+const getTranslate = (map: Map<string, string>, expression: string):string => {
+    if (expression === undefined)
         return "error";
 
-    return categoriesTranslate.get(category.replace(/\s/g, "-").toLowerCase())!;
+    if (expression === "")
+        return expression;
+
+    let result = "";
+
+    // if (expression.match(/[A-Z]/i))
+    //     result = map.get(expression.replace(/\s/g, "-").toLowerCase())!;
+    // else
+        map.forEach((value, key) => {
+            // const orig = value.toLowerCase();
+            // const tran = category.toLowerCase();
+            // const cm1 = orig == tran;
+            // const cm2 = orig === tran;
+
+            if (value.toLowerCase() === expression.toLowerCase()) {
+                result = key;
+                return;
+            }
+
+            if (key.toLowerCase() === expression.toLowerCase())
+            {
+                result = value;
+                return;
+            }
+        });
+
+    return result;
 }
 
-export const getShowTypeTranslate = (showType: string): string => {
-        if (showType === undefined)
-                return "error";
-
-        return showTypesTranslate.get(showType.replace(/\s/g, "-").toLowerCase())!;
-}
-
-export const getStatusTranslate = (status: string): string => {
-        if (status === undefined)
-                return "error";
-
-        return statusTranslate.get(status.replace(/\s/g, "-").toLowerCase())!;
-}
-
-export const getSortTranslate = (sort: string): string => {
-    if (sort === undefined)
-        return "error";
-
-    return sortTranslate.get(sort.replace(/\s/g, "-").toLowerCase())!;
-}
+export const getCategoryTranslate = (category: string): string => getTranslate(categoriesTranslate, category);
+export const getShowTypeTranslate = (showType: string): string => getTranslate(showTypesTranslate, showType);
+export const getStatusTranslate = (status: string): string => getTranslate(statusTranslate, status);
+export const getAgeRatingsTranslate = (ageRating: string): string => getTranslate(ageRatingsTranslate, ageRating);
+export const getSortTranslate = (sort: string): string => getTranslate(sortTranslate, sort);
 
 export const categoriesTranslateArray = Array.from(categoriesTranslate).sort(sort);
 export const showTypesTranslateArray = Array.from(showTypesTranslate).sort(sort);
 export const statusTranslateArray = Array.from(statusTranslate).sort(sort);
 export const ageRatingsTranslateArray = Array.from(ageRatingsTranslate).sort(sort);
-export const sortTranslateArray = Array.from(sortTranslate).sort(sort);
-
+export const sortTranslateArray = Array.from(sortTranslate);

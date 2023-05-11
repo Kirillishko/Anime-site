@@ -10,19 +10,80 @@
 
 .search-top {
     display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between
+}
+
+.search-top-sort {
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between
 }
 
-.search-top-left {
-    
+.search-top-sort-grouping {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end
 }
 
-.search-top-right {
+.search-top-sort-grouping button {
+    border: none;
+    height: 30%;
+    padding: 0;
+    opacity: 0.8;
+}
 
+.search-top-sort-grouping button.active {
+    filter: invert(100%);
+    background-color: #00a3a8; /* Чтобы был такой цвет: #ff5c57*/
+}
+
+.search-top-sort-grouping img {
+    /*width: 100%;*/
+    height: 100%;
 }
 
 .search-right {
     width: 20%;
+}
+
+.search-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.animePreview {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+}
+
+.animePreview.table {
+    width: 25%;
+    padding: 16px 15px;
+}
+
+.animePreview.twoColumn {
+    width: 50%;
+}
+
+.animePreview.list {
+
+}
+
+.animePreview-left {
+
+}
+
+.animePreview-left img {
+    width: 100%;
+}
+
+.animePreview-right {
+
 }

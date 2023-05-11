@@ -8,35 +8,35 @@ import {
     SelectChangeEvent
 } from "@mui/material";
 import {useAppDispatch} from "../../hooks/redux";
-import {setTitle, setCategories, setStatus, setShowType, setSort} from "../../store/reducers/SearchLineSlice";
+import {setTitle, setCategories, setStatus, setAgeRating, setSort} from "../../store/reducers/SearchLineSlice";
 
 interface DropdownProps {
     label: string,
     items: string[][],
     multiple: boolean,
-    action: "setTitle" | "setCategories" | "setStatus" | "setShowType" | "setSort"
+    action: "setTitle" | "setCategories" | "setStatus" | "setAgeRating" | "setSort"
 }
 
 const actions = {
     setTitle: setTitle,
-    setSort: setSort,
     setCategories: setCategories,
     setStatus: setStatus,
-    setShowType: setShowType,
+    setAgeRating: setAgeRating,
+    setSort: setSort,
 }
 
-const Dropdown:FC<DropdownProps> = ({label, items, multiple, action}) => {
-    const ITEM_HEIGHT = 48;
-    const ITEM_PADDING_TOP = 8;
-    const MenuProps = {
-        PaperProps: {
-            style: {
-                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-                width: 0,
-            },
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 0,
         },
-    };
+    },
+};
 
+const Dropdown:FC<DropdownProps> = ({label, items, multiple, action}) => {
     const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
     const dispatch = useAppDispatch();
 
@@ -54,8 +54,6 @@ const Dropdown:FC<DropdownProps> = ({label, items, multiple, action}) => {
         if (actions[action]) {
             dispatch(actions[action](value));
         }
-
-        console.log(selectedItems);
     };
 
     return (
