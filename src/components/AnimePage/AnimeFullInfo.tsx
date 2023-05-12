@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {IAnime} from "../../models/Anime/IAnime";
-import {formatToCorrectDate} from "../../helpers/dataFormatter";
+import {formatToLongDate} from "../../helpers/dataFormatter";
 import InfoItem from "./InfoItem";
 import {getShowTypeTranslate, getStatusTranslate} from "../../translate/Translates";
 
@@ -50,7 +50,7 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                 <hr/>
                 <div className={"info-item"}>
                     <p className={"info-names"}>Следующий эпизод</p>
-                    <p className={"info-descriptions"}>{formatToCorrectDate(attributes.nextRelease)}</p>
+                    <p className={"info-descriptions"}>{formatToLongDate(attributes.nextRelease)}</p>
                 </div>
                 <hr/>
                 <div className={"info"}>
@@ -61,7 +61,7 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                               description={`${getStatusTranslate(attributes.status)}`}
                               type={"information"}/>
                     <InfoItem name={`Выпуск`}
-                              description={`${formatToCorrectDate(attributes.startDate)}`}
+                              description={`${formatToLongDate(attributes.startDate)}`}
                               type={"information"}/>
                     <InfoItem name={`Рейтинг MPAA`}
                               description={`${attributes.ageRating}`}

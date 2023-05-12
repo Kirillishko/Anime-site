@@ -58,7 +58,7 @@ const Dropdown:FC<DropdownProps> = ({label, items, multiple, action}) => {
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{m: 1, width: '100%', boxSizing: 'border-box', margin: 0}}>
                 <InputLabel color={"secondary"}>{label}</InputLabel>
                 <Select
                     multiple={multiple}

@@ -86,6 +86,7 @@ const SearchPage = () => {
                 <div className={"search-top"}>
                     <h1>Список аниме</h1>
                     <div className={"search-top-sort"}>
+                        <p>Сортировать по: </p>
                         <ThemeProvider theme={theme}>
                             <Dropdown label={"Сортировка"} items={sortTranslateArray}
                                       multiple={false} action={"setSort"}/>
@@ -108,7 +109,7 @@ const SearchPage = () => {
             <div className={"search-right"}>
                 <div className={"search-categories"}>
                     <ThemeProvider theme={theme}>
-                        <FormControl sx={{m: 1, width: 300}}>
+                        <FormControl sx={{m: 1, width: '100%', boxSizing: 'border-box', margin: 0}}>
                             <TextField
                                 id="filled-search"
                                 label="Поиск"

@@ -2,10 +2,12 @@
     box-sizing: content-box;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .search-left {
-    width: 80%;
+    width: 75%;
+    background-color: #fff;
 }
 
 .search-top {
@@ -19,7 +21,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between
+    justify-content: space-between;
+    border-top: 1px solid #343a40;
+    border-bottom: 1px solid #343a40;
 }
 
 .search-top-sort-grouping {
@@ -48,6 +52,8 @@
 
 .search-right {
     width: 20%;
+    background-color: #fff;
+    padding: 10px;
 }
 
 .search-content {
