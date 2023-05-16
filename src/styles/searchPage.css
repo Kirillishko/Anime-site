@@ -17,6 +17,10 @@
     justify-content: space-between
 }
 
+.search-top * {
+    height: auto;
+}
+
 .search-top-sort {
     display: flex;
     flex-direction: row;
@@ -26,11 +30,19 @@
     border-bottom: 1px solid #343a40;
 }
 
+.search-top-sort-sorting {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 2vw;
+}
+
 .search-top-sort-grouping {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: flex-end
+    justify-content: flex-end;
+    gap: 0.5vw;
 }
 
 .search-top-sort-grouping button {

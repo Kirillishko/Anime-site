@@ -86,11 +86,13 @@ const SearchPage = () => {
                 <div className={"search-top"}>
                     <h1>Список аниме</h1>
                     <div className={"search-top-sort"}>
-                        <p>Сортировать по: </p>
-                        <ThemeProvider theme={theme}>
-                            <Dropdown label={"Сортировка"} items={sortTranslateArray}
-                                      multiple={false} action={"setSort"}/>
-                        </ThemeProvider>
+                        <div className={"search-top-sort-sorting"}>
+                            <p>Сортировать по: </p>
+                            <ThemeProvider theme={theme}>
+                                <Dropdown label={"Сортировка"} items={sortTranslateArray}
+                                          multiple={false} action={"setSort"}/>
+                            </ThemeProvider>
+                        </div>
                         <div className={"search-top-sort-grouping"}>
                             <button className={"active"}><img src={tableImage} alt={"table"}/></button>
                             <button><img src={twoColumnImage} alt={"table"}/></button>
