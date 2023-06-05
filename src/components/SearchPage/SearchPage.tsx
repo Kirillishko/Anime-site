@@ -29,6 +29,7 @@ import useDebounce from "../../hooks/useDebounce";
 import tableImage from "../../images/grouping/table.png";
 import twoColumnImage from "../../images/grouping/twoColumn.png";
 import listImage from "../../images/grouping/list.png";
+import optionsImage from "../../images/options.png";
 
 const theme = createTheme({
     palette: {
@@ -110,6 +111,10 @@ const SearchPage = () => {
             </div>
             <div className={"search-right"}>
                 <div className={"search-categories"}>
+                    <div className={"search-categories-header"}>
+                        <img src={optionsImage}/>
+                        <p>Фильтр</p>
+                    </div>
                     <ThemeProvider theme={theme}>
                         <FormControl sx={{m: 1, width: '100%', boxSizing: 'border-box', margin: 0}}>
                             <TextField
