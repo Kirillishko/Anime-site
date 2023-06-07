@@ -10,6 +10,16 @@ interface AnimeFullInfoProps {
 
 const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
     const {attributes} = anime;
+    const status = getStatusTranslate(attributes.status);
+    let nextRelease;
+
+    if (anime.attributes.nextRelease === null) {
+        if (status === "Завершено")
+            nextRelease = "Релиз завершён";
+        else
+            nextRelease = "Неизвестно";
+    } else
+        nextRelease = formatToLongDate(attributes.nextRelease);
 
     return (
         <div className={"animeFullInfo"}>
@@ -50,7 +60,7 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                 <hr/>
                 <div className={"info-item"}>
                     <p className={"info-names"}>Следующий эпизод</p>
-                    <p className={"info-descriptions"}>{formatToLongDate(attributes.nextRelease)}</p>
+                    <p className={"info-descriptions"}>{nextRelease}</p>
                 </div>
                 <hr/>
                 <div className={"info"}>
@@ -58,7 +68,7 @@ const AnimeFullInfo: FC<AnimeFullInfoProps> = ({anime}) => {
                               description={`${getShowTypeTranslate(attributes.showType)}`}
                               type={"information"}/>
                     <InfoItem name={`Статус`}
-                              description={`${getStatusTranslate(attributes.status)}`}
+                              description={status}
                               type={"information"}/>
                     <InfoItem name={`Выпуск`}
                               description={`${formatToLongDate(attributes.startDate)}`}
