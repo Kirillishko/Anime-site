@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 const Header = () => {
 	return (
-		<>
+		<div>
 			<div className={'header'}>
 				<div className={'subHeader'}>
 					<div className={'leftSubHeader'}>
@@ -29,7 +29,7 @@ const Header = () => {
 			<div className={'outlet'}>
 				<Outlet />
 			</div>
-		</>
+		</div>
 	);
 };
 

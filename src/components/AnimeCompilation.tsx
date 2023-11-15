@@ -13,6 +13,7 @@ interface AnimeCompilationProps {
 }
 
 const AnimeCompilation: FC<AnimeCompilationProps> = ({title, animeData}) => {
+
     return (
         <div className="animeCompilation">
             <div className={"animeCompilationTitle"}>

@@ -1,12 +1,10 @@
 .tooltip {
-    position: relative;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s;
 }
 
-.tooltipText {
-    visibility: hidden;
-}
-
-.tooltip:hover .tooltipText {
+.tooltip active{
     position: absolute;
     visibility: visible;
     width: fit-content;

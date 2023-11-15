@@ -3,40 +3,22 @@ import Tooltip from "../Tooltip";
 
 interface AnimeInfoItemProps {
     name: string,
-    nameTip?: string,
     description: string,
-    descriptionTip?: string,
-    type : "information" | "rating";
+    tooltipText?: string,
 }
 
-const InfoItem: FC<AnimeInfoItemProps> = ({name, nameTip,
-                                           description, descriptionTip, type}) => {
-    if (description == "null")
-        return null;
+const InfoItem: FC<AnimeInfoItemProps> = ({name, description, tooltipText}) => {
 
-    if (type == "information") {
-        return (
-            <div className={"info-item"}>
-                {nameTip == undefined ? <p className={"info-names"}>{name}</p>
-                                      : <Tooltip text={name} tip={nameTip}
-                                                 className={"info-names"}/>}
-                {descriptionTip == undefined ? <p className={"info-descriptions"}>{description}</p>
-                                             : <Tooltip text={description} tip={descriptionTip}
-                                                        className={"info-descriptions"}/>}
+
+    return (
+        <div className={"info-item"}>
+            <p className={"info-names"}>{name}</p>
+            <div className={"info-description"}>
+                <p className={"info-descriptions"}>{description}</p>
+                {/*{tooltipText && <Tooltip tooltipText={tooltipText}/>}*/}
             </div>
-        );
-    } else {
-        return (
-            <div className={"info-item"}>
-                {nameTip == undefined ? <p className={"rating-names"}>{name}</p>
-                                      : <Tooltip text={name} tip={nameTip}
-                                                 className={"rating-names"}/>}
-                {descriptionTip == undefined ? <p className={"rating-descriptions"}>{description}</p>
-                                      : <Tooltip text={description} tip={descriptionTip}
-                                                 className={"rating-descriptions"}/>}
-            </div>
-        );
-    }
+        </div>
+    );
 };
 
 export default InfoItem;

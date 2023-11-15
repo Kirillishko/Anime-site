@@ -1,19 +1,19 @@
-import React, {FC} from 'react';
-import "../styles/tooltip.css"
+import React, { FC } from "react";
+import "../styles/tooltip.css";
 
 interface TooltipProps {
-    text: string,
-    tip: string,
-    className: string,
+	tooltipText: string;
+	isActive: boolean;
 }
 
-const Tooltip:FC<TooltipProps> = ({text, tip, className}) => {
-    return (
-        <div className={"tooltip"}>
-            <p className={className}>{text}</p>
-            <span className={"tooltipText"}>{tip}</span>
-        </div>
-    );
+const Tooltip: FC<TooltipProps> = ({ tooltipText, isActive }) => {
+	const className = isActive ? "tooltip" : "tooltip active";
+
+	return (
+		<div className={className}>
+			<p>{tooltipText}</p>
+		</div>
+	);
 };
 
 export default Tooltip;

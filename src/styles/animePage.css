@@ -66,6 +66,10 @@
     width: 40%;
 }
 
+.info-description {
+    position: relative;
+}
+
 .info-descriptions {
     width: 60%;
 }

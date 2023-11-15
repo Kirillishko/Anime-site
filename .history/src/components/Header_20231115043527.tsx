@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import TelegramIcon from '../../public/Logo.png';
 
 const Header = () => {
 	return (
-		<>
+		<header>
 			<div className={'header'}>
 				<div className={'subHeader'}>
 					<div className={'leftSubHeader'}>
@@ -17,10 +18,10 @@ const Header = () => {
 					</div>
 					<div className={'rightSubHeader'}>
 						<a href={''} target={'_blank'}>
-							<img src={'/github-mark-white.png'} />
+							<img src={'https://smajlik.ru/wp-content/uploads/2017/12/2.png'} />
 						</a>
 						<a href={'https://t.me/Kirillishkop'} target={'_blank'}>
-							<img src={'/Tel.png'} alt="Telegram" />
+							<img src={TelegramIcon} alt="Telegram" />
 						</a>
 					</div>
 				</div>
@@ -29,7 +30,7 @@ const Header = () => {
 			<div className={'outlet'}>
 				<Outlet />
 			</div>
-		</>
+		</header>
 	);
 };
 
